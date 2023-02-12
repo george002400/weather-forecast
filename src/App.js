@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import TopButtons from "./components/TopButtons";
+import Inputs from "./components/Inputs";
+import TimeAndLocation from "./components/TimeAndLocation";
+import TemperatureAndDetails from "./components/TemperatureAndDetails";
 import getFormattedWeatherData from "./services/weatherService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -104,6 +108,16 @@ function App() {
               <div>{userData.html_url}</div>
             </div>
           ) : null}
+          <TopButtons setQuery={setQuery} />
+          <Inputs setQuery={setQuery} units={units} setUnits={setUnits} />
+          {weather && (
+            <div>
+              <TimeAndLocation weather={weather} />
+              <TemperatureAndDetails weather={weather} />
+            </div>
+          )}
+
+          <ToastContainer autoClose={5000} theme="colored" newestOnTop={true} />
         </div>
       ) : (
         <>
